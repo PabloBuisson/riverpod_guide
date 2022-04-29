@@ -1,6 +1,15 @@
-# flexibledashboard
+# Flexible Dashboard
 
 A new Flutter application.
+
+## To cover
+* RiverPod 2.0
+    * in Stateless widget
+    * in Stateful widget
+    * in a particular widget
+* Freezed
+* Desktop
+* Multiple themes
 
 ## Getting Started
 

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// declaration of providers
+// readOnly values
+final cityProvider = Provider((ref) => 'London');
+final countryProvider = Provider((ref) => 'England');
+// simple mutable values (String, bool, int)
+final counterProvider = StateProvider((ref) => 0);
+// 💡 0 is the initial value of our provider
 
 void main() {
-  runApp(const MyApp());
+  // 🔔 For providers to work,
+  // you need to add ProviderScope at the root of your Flutter applications
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,34 +27,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+// Using ConsumerWidget, this allows the widget tree to listen to changes on provider,
+// so that the UI automatically updates when needed
+class MyHomePage extends ConsumerWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+  // no longer needed ↓
+  //  final _counter = 0;
+  //  void _incrementCounter() {
+  //     _counter++;
+  //  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("HomePage"),
       ),
       body: Center(
         child: Column(
@@ -53,14 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              // 💡 WATCH => will rebuild the widget when the value changes
+              ref.watch(counterProvider).toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          // 💡 READ => only check the value, without rebuilding the widget if changes
+          ref.read(counterProvider.notifier).state++;
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
