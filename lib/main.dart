@@ -8,6 +8,8 @@ final countryProvider = Provider((ref) => 'England');
 // simple mutable values (String, bool, int)
 final counterProvider = StateProvider((ref) => 0);
 // 💡 0 is the initial value of our provider
+// final counterProvider = StateProvider.autoDispose((ref) => 0);
+// 💡 autoDispose will reset the value when no longer used
 
 void main() {
   // 🔔 For providers to work,
@@ -44,9 +46,44 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 💡 to perform ACTIONS => navigation, showing alerts, snackbars, ect.
+    // Listen to a provider and call listener whenever its value changes.
+    // This is useful for showing modals or other imperative logic.
+    ref.listen<int>(counterProvider, (previous, next) {
+      if (next >= 5) {
+        // when our counterProvider is greater than 5
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Warning'),
+                content: const Text(
+                    'Counter dangerously high. Consider resetting it.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  )
+                ],
+              );
+            });
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("HomePage"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                // invalidates the state of the provider, causing it to refresh
+                // 💡 Calling invalidate will cause the provider to be disposed immediately
+                ref.invalidate(counterProvider);
+              },
+              icon: const Icon(Icons.refresh))
+        ],
       ),
       body: Center(
         child: Column(
