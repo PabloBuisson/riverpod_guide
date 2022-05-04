@@ -1,5 +1,22 @@
+import 'package:badges/badges.dart';
+import 'package:flexibledashboard/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+abstract class WebsocketClient {
+  Stream<int> getCounterStream();
+}
+
+class FakeWebsocketClient implements WebsocketClient {
+  @override
+  Stream<int> getCounterStream() async* {
+    int i = 0;
+    while (true) {
+      await Future.delayed(const Duration(seconds: 5));
+      yield i++;
+    }
+  }
+}
 
 // declaration of providers
 // readOnly values
@@ -10,6 +27,17 @@ final counterProvider = StateProvider((ref) => 0);
 // 💡 0 is the initial value of our provider
 // final counterProvider = StateProvider.autoDispose((ref) => 0);
 // 💡 autoDispose will reset the value when no longer used
+
+final websocketClientProvider = Provider<WebsocketClient>(
+  (ref) {
+    return FakeWebsocketClient();
+  },
+);
+// StreamProvider
+final counterNotifications = StreamProvider<int>((ref) {
+  final wsClient = ref.watch(websocketClientProvider);
+  return wsClient.getCounterStream();
+});
 
 void main() {
   // 🔔 For providers to work,
@@ -46,6 +74,13 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Returns the value exposed by a provider
+    // and rebuild the widget when that value change
+    // State Provider ↓
+    final int counter = ref.watch(counterProvider);
+    // Stream Provider ↓
+    final AsyncValue<int> notificationsLength = ref.watch(counterNotifications);
+
     // 💡 to perform ACTIONS => navigation, showing alerts, snackbars, ect.
     // Listen to a provider and call listener whenever its value changes.
     // This is useful for showing modals or other imperative logic.
@@ -82,7 +117,27 @@ class MyHomePage extends ConsumerWidget {
                 // 💡 Calling invalidate will cause the provider to be disposed immediately
                 ref.invalidate(counterProvider);
               },
-              icon: const Icon(Icons.refresh))
+              icon: const Icon(Icons.refresh)),
+          Badge(
+            position: BadgePosition.topEnd(top: 10, end: 10),
+            badgeContent: Text(
+              // with async value, we use the "when" method
+              notificationsLength
+                  .when(
+                      data: (int value) => value,
+                      error: (Object error, _) => "0",
+                      loading: () => "0")
+                  .toString(),
+              style: const TextStyle(color: Colors.white),
+            ),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => const NotificationsScreen()),
+                  ));
+                },
+                icon: const Icon(Icons.notifications)),
+          )
         ],
       ),
       body: Center(
@@ -94,7 +149,8 @@ class MyHomePage extends ConsumerWidget {
             ),
             Text(
               // 💡 WATCH => will rebuild the widget when the value changes
-              ref.watch(counterProvider).toString(),
+              // ref.watch(counterProvider).toString(),
+              counter.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
