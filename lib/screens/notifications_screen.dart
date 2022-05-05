@@ -3,13 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../main.dart';
 
-// ConsumerWidget is like a StatelessWidget
-// but with a WidgetRef parameter added in the build method.
-class NotificationsScreen extends ConsumerWidget {
+// ConsumerStatefulWidget  is like a StatefulWidget
+class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  NotificationsScreenState createState() => NotificationsScreenState();
+}
+
+class NotificationsScreenState extends ConsumerState<NotificationsScreen> {
+  @override
+  void dispose() {
+    // "ref" can be used in all life-cycles of a StatefulWidget
+    ref.invalidate(counterNotifications);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // Stream Provider ↓
     final AsyncValue<int> notificationsLength = ref.watch(counterNotifications);
 

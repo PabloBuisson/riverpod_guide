@@ -27,6 +27,7 @@ final counterProvider = StateProvider((ref) => 0);
 // 💡 0 is the initial value of our provider
 // final counterProvider = StateProvider.autoDispose((ref) => 0);
 // 💡 autoDispose will reset the value when no longer used
+// the provider will automatically destroy its state when it is no longer being listened to
 
 final websocketClientProvider = Provider<WebsocketClient>(
   (ref) {
@@ -120,6 +121,11 @@ class MyHomePage extends ConsumerWidget {
               icon: const Icon(Icons.refresh)),
           Badge(
             position: BadgePosition.topEnd(top: 10, end: 10),
+            showBadge: // with async value, we use the "when" method
+                notificationsLength.when(
+                    data: (int value) => value > 0,
+                    error: (Object error, _) => false,
+                    loading: () => false),
             badgeContent: Text(
               // with async value, we use the "when" method
               notificationsLength
