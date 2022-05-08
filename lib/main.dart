@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:flexibledashboard/screens/advices_screen.dart';
 import 'package:flexibledashboard/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,7 @@ class FakeWebsocketClient implements WebsocketClient {
   Stream<int> getCounterStream() async* {
     int i = 0;
     while (true) {
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(minutes: 5));
       yield i++;
     }
   }
@@ -159,6 +160,13 @@ class MyHomePage extends ConsumerWidget {
               counter.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => AdvicesScreen()),
+                  ));
+                },
+                child: const Text("Go grab an advice"))
           ],
         ),
       ),

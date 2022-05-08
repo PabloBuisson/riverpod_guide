@@ -1,13 +1,32 @@
 import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../models/advice.dart';
 
 class ApiAdviceSlip {
-  static Future<String> getRandomAdvice() async {
-    // https://api.adviceslip.com/advice
-    return Future.value('');
+  static Future<Advice> getRandomAdvice() async {
+    const url = "https://api.adviceslip.com/advice";
+    final response = await http.get(Uri.parse(url));
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      return Advice.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load advice');
+    }
   }
 
-  static Future<String> getAdviceById(String id) async {
-    // https://api.adviceslip.com/advice/{slip_id}
-    return Future.value('');
+  static Future<Advice> getAdviceById(int id) async {
+    final url = "https://api.adviceslip.com/advice/$id";
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      return Advice.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load advice');
+    }
   }
 }
