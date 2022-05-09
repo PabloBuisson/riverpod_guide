@@ -7,9 +7,9 @@ class Advice {
 
   factory Advice.fromJson(Map<String, dynamic> json) {
     return Advice(
-      id: json['slip']['id'],
-      advice: json['slip']['advice'],
-      date: json['slip']['date'],
+      id: json['id'],
+      advice: json['advice'],
+      date: json['date'],
     );
   }
 }

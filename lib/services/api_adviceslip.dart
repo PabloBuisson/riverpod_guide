@@ -10,10 +10,8 @@ class ApiAdviceSlip {
     const url = "https://api.adviceslip.com/advice";
     final response = await http.get(Uri.parse(url));
 
-    print(response.body);
-
     if (response.statusCode == 200) {
-      return Advice.fromJson(jsonDecode(response.body));
+      return Advice.fromJson(jsonDecode(response.body)['slip']);
     } else {
       throw Exception('Failed to load advice');
     }
@@ -24,7 +22,7 @@ class ApiAdviceSlip {
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      return Advice.fromJson(jsonDecode(response.body));
+      return Advice.fromJson(jsonDecode(response.body)['slip']);
     } else {
       throw Exception('Failed to load advice');
     }
