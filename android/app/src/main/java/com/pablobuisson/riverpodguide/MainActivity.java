@@ -1,4 +1,4 @@
-package com.pablobuisson.flexibledashboard;
+package com.pablobuisson.riverpodguide;
 
 import io.flutter.embedding.android.FlutterActivity;
 

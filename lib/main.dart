@@ -1,8 +1,9 @@
 import 'package:badges/badges.dart';
-import 'package:flexibledashboard/screens/advices_screen.dart';
-import 'package:flexibledashboard/screens/notifications_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'screens/advices_screen.dart';
+import 'screens/notifications_screen.dart';
 
 abstract class WebsocketClient {
   Stream<int> getCounterStream();

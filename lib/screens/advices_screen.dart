@@ -1,9 +1,10 @@
 import 'dart:math';
 
-import 'package:flexibledashboard/models/advice.dart';
-import 'package:flexibledashboard/services/api_adviceslip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/advice.dart';
+import '../services/api_adviceslip.dart';
 
 class AdvicesScreen extends ConsumerWidget {
   AdvicesScreen({Key? key}) : super(key: key);
