@@ -1,7 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpodguide/notifiers/animals_notifier.dart';
+import 'package:riverpodguide/screens/animals_screen.dart';
 
+import 'models/animal.dart';
 import 'screens/advices_screen.dart';
 import 'screens/notifications_screen.dart';
 
@@ -40,6 +43,11 @@ final websocketClientProvider = Provider<WebsocketClient>(
 final counterNotifications = StreamProvider<int>((ref) {
   final wsClient = ref.watch(websocketClientProvider);
   return wsClient.getCounterStream();
+});
+// StateNotifierProvider
+final animalsProvider =
+    StateNotifierProvider<AnimalsNotifier, List<Animal>>((ref) {
+  return AnimalsNotifier();
 });
 
 void main() {
@@ -167,7 +175,14 @@ class MyHomePage extends ConsumerWidget {
                     builder: ((context) => AdvicesScreen()),
                   ));
                 },
-                child: const Text("Go grab an advice"))
+                child: const Text("Grab an advice")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => AnimalsScreen()),
+                  ));
+                },
+                child: const Text("Learn about animals")),
           ],
         ),
       ),
