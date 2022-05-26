@@ -18,7 +18,7 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
         state = animals;
       } else {
         // if some animals are already loaded with add the new ones to the list
-        List<int> animalsIds = getStateAnimalsIds();
+        List<int> animalsIds = _getStateAnimalsIds();
         for (final animal in animals) {
           if (animal.id != null && !animalsIds.contains(animal.id)) {
             state = [...state, animal];
@@ -30,7 +30,7 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
     });
   }
 
-  List<int> getStateAnimalsIds() {
+  List<int> _getStateAnimalsIds() {
     List<int> animalsIds = [];
     for (final animal in state) {
       if (animal.id != null) {
@@ -38,6 +38,17 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
       }
     }
     return animalsIds;
+  }
+
+  Animal? getStateAnimalById(int id) {
+    if (state.isNotEmpty) {
+      for (final animal in state) {
+        if (animal.id == id) {
+          return animal;
+        }
+      }
+    }
+    return null;
   }
 
   markAsFavorite(int animalId) {

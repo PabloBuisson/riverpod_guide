@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/advice.dart';
 import '../services/api_adviceslip.dart';
+import '../widgets/advice_block.dart';
 
 class AdvicesScreen extends ConsumerWidget {
   AdvicesScreen({Key? key}) : super(key: key);
@@ -62,33 +63,6 @@ class AdvicesScreen extends ConsumerWidget {
             AdviceBlock(advice: adviceRandomId),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AdviceBlock extends StatelessWidget {
-  const AdviceBlock({Key? key, required this.advice}) : super(key: key);
-
-  final AsyncValue<Advice> advice;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      decoration: BoxDecoration(
-          color: Colors.grey[200],
-          border:
-              const Border(left: BorderSide(color: Colors.grey, width: 5.0))),
-      child: Text(
-        advice.when(
-            data: (Advice value) => value.advice,
-            error: (Object error, _) =>
-                "A problem occurred, please try again later",
-            loading: () => "Loading..."),
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontStyle: FontStyle.italic),
       ),
     );
   }
