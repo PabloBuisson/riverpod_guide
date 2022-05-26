@@ -75,6 +75,19 @@ class Animal {
     return Animal(
       id: id ?? this.id,
       favorite: favorite ?? this.favorite,
+      name: name,
+      latinName: latinName,
+      animalType: animalType,
+      activeTime: activeTime,
+      lengthMin: lengthMin,
+      lengthMax: lengthMax,
+      weightMin: weightMin,
+      weightMax: weightMax,
+      lifespan: lifespan,
+      habitat: habitat,
+      diet: diet,
+      geoRange: geoRange,
+      imageLink: imageLink,
     );
   }
 }
