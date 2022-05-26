@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../main.dart';
+import '../providers.dart';
 
 // ConsumerStatefulWidget  is like a StatefulWidget
 class NotificationsScreen extends ConsumerStatefulWidget {

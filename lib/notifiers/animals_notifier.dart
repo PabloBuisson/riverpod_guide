@@ -13,13 +13,31 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
   AnimalsNotifier() : super([]);
 
   Future<void> getRandomAnimals(int size) async {
-    ApiZooAnimals.getRandomAnimals(size).then((value) {
-      print(value);
-      state = value;
+    ApiZooAnimals.getRandomAnimals(size).then((List<Animal> animals) {
+      if (state.isEmpty) {
+        state = animals;
+      } else {
+        // if some animals are already loaded with add the new ones to the list
+        List<int> animalsIds = getStateAnimalsIds();
+        for (final animal in animals) {
+          if (animal.id != null && !animalsIds.contains(animal.id)) {
+            state = [...state, animal];
+          }
+        }
+      }
     }, onError: (error) {
-      print(error.toString());
-      //TODO throw error
+      return Future.error(error);
     });
+  }
+
+  List<int> getStateAnimalsIds() {
+    List<int> animalsIds = [];
+    for (final animal in state) {
+      if (animal.id != null) {
+        animalsIds.add(animal.id!);
+      }
+    }
+    return animalsIds;
   }
 
   markAsFavorite(int animalId) {
