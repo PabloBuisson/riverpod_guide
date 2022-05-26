@@ -5,27 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/animal.dart';
 import '../providers.dart';
 
-class AnimalDetailsScreen extends ConsumerStatefulWidget {
+class AnimalDetailsScreen extends ConsumerWidget {
   final int animalId;
   const AnimalDetailsScreen({Key? key, required this.animalId})
       : super(key: key);
 
   @override
-  _AnimalDetailsScreenState createState() => _AnimalDetailsScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // we use watch and select to filter the selected animal in our state
+    Animal animal = ref.watch(animalsProvider.select((List<Animal> animals) =>
+        animals.firstWhere((animal) => animal.id == animalId)));
 
-class _AnimalDetailsScreenState extends ConsumerState<AnimalDetailsScreen> {
-  late Animal animal;
-
-  @override
-  void initState() {
-    super.initState();
-    animal =
-        ref.read(animalsProvider.notifier).getStateAnimalById(widget.animalId)!;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Animal details"),

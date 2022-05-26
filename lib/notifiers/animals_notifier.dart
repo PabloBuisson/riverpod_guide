@@ -40,17 +40,6 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
     return animalsIds;
   }
 
-  Animal? getStateAnimalById(int id) {
-    if (state.isNotEmpty) {
-      for (final animal in state) {
-        if (animal.id == id) {
-          return animal;
-        }
-      }
-    }
-    return null;
-  }
-
   markAsFavorite(int animalId) {
     state = [
       for (final animal in state)
