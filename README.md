@@ -8,13 +8,18 @@ A Flutter project which explore all the possibilities and novelties of the River
     * in Stateless widget
     * in Stateful widget
     * in a particular widget
-    * with all the different providers
+    * with all the different providers   
+       * Provider
+       * StateProvider
+       * FutureProvider
+       * StreamProvider
+       * StateNotifierProvider
     * best practices
- * Use cached images
+* Use cached images
 
 ## :dart: Presentation of the project
 
-* In this simple demo, I explore all the ways to add state management to a project, with the Riverpod package.
+* In this simple demo, I explore all the ways to **manage the state of a project** with the *Riverpod* package.
 * Resources :   
   * Riverpod 2.0 – Complete Guide (Flutter Tutorial) - Reso Coder : https://resocoder.com/2022/04/22/riverpod-2-0-complete-guide-flutter-tutorial/
   * Riverpod : https://riverpod.dev/
@@ -34,7 +39,10 @@ TODO
 
 ## :package: Packages
 
-TODO
+* [flutter_riverpod](#https://pub.dev/packages/flutter_riverpod)
+* [badges](#https://pub.dev/packages/badges)
+* [http](#https://pub.dev/packages/http)
+* [cached_network_image](#https://pub.dev/packages/cached_network_image)
 
 ## :pushpin: Technologies
 
