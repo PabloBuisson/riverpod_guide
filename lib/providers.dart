@@ -12,8 +12,8 @@ class FakeWebsocketClient implements WebsocketClient {
   Stream<int> getCounterStream() async* {
     int i = 0;
     while (true) {
-      await Future.delayed(const Duration(minutes: 5));
       yield i++;
+      await Future.delayed(const Duration(minutes: 1));
     }
   }
 }
