@@ -133,7 +133,7 @@ class RowDetail extends StatelessWidget {
           const Icon(
             Icons.check,
             size: 20.0,
-            color: Colors.blue,
+            color: Colors.purple,
           ),
           const SizedBox(
             width: 10.0,

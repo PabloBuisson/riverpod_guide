@@ -7,6 +7,8 @@ import '../providers.dart';
 import '../widgets/animal_card.dart';
 
 class AnimalsScreen extends ConsumerStatefulWidget {
+  const AnimalsScreen({Key? key}) : super(key: key);
+
   @override
   _AnimalsScreenState createState() => _AnimalsScreenState();
 }
@@ -15,7 +17,7 @@ class _AnimalsScreenState extends ConsumerState<AnimalsScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(animalsProvider.notifier).getRandomAnimals(10);
+    ref.read(animalsProvider.notifier).getInitialAnimalList();
   }
 
   @override

@@ -16,14 +16,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       home: const MyHomePage(),
     );
@@ -59,9 +58,9 @@ class MyHomePage extends ConsumerWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: const Text('Warning'),
+                title: const Text('Hey !'),
                 content: const Text(
-                    'Counter dangerously high. Consider resetting it.'),
+                    'You seem to have a lot of unseen messages. To check on them, click on the bell icon !'),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -126,6 +125,9 @@ class MyHomePage extends ConsumerWidget {
               counter.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
+            const SizedBox(
+              height: 20.0,
+            ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -133,10 +135,13 @@ class MyHomePage extends ConsumerWidget {
                   ));
                 },
                 child: const Text("Grab an advice")),
+            const SizedBox(
+              height: 20.0,
+            ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: ((context) => AnimalsScreen()),
+                    builder: ((context) => const AnimalsScreen()),
                   ));
                 },
                 child: const Text("Learn about animals")),

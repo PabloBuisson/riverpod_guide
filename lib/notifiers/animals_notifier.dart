@@ -12,6 +12,14 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
   /// and will display the animals of the new list
   AnimalsNotifier() : super([]);
 
+  /// load the first 10 animals to display
+  getInitialAnimalList() {
+    if (state.isEmpty) {
+      getRandomAnimals(10);
+    }
+  }
+
+  /// load an amount of animals and add them to the state
   Future<void> getRandomAnimals(int size) async {
     ApiZooAnimals.getRandomAnimals(size).then((List<Animal> animals) {
       if (state.isEmpty) {
@@ -30,6 +38,7 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
     });
   }
 
+  /// get a list of animal ids to add only animals that are not in the state
   List<int> _getStateAnimalsIds() {
     List<int> animalsIds = [];
     for (final animal in state) {
