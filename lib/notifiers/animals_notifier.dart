@@ -12,6 +12,14 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
   /// and will display the animals of the new list
   AnimalsNotifier() : super([]);
 
+  Animal? _selectedAnimal;
+
+  get selectedAnimal => _selectedAnimal;
+
+  selectAnimal(animalId) {
+    _selectedAnimal = _getStateAnimalById(animalId);
+  }
+
   /// load the first 10 animals to display
   getInitialAnimalList() {
     if (state.isEmpty) {
@@ -36,6 +44,17 @@ class AnimalsNotifier extends StateNotifier<List<Animal>> {
     }, onError: (error) {
       return Future.error(error);
     });
+  }
+
+  Animal? _getStateAnimalById(int id) {
+    if (state.isNotEmpty) {
+      for (final animal in state) {
+        if (animal.id == id) {
+          return animal;
+        }
+      }
+    }
+    return null;
   }
 
   /// get a list of animal ids to add only animals that are not in the state

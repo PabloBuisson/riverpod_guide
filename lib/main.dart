@@ -58,9 +58,9 @@ class MyHomePage extends ConsumerWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: const Text('Hey !'),
+                title: const Text('Warning'),
                 content: const Text(
-                    'You seem to have a lot of unseen messages. To check on them, click on the bell icon !'),
+                    'Counter dangerously high. Consider resetting it.'),
                 actions: [
                   TextButton(
                     onPressed: () {

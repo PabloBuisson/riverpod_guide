@@ -6,15 +6,11 @@ import '../models/animal.dart';
 import '../providers.dart';
 
 class AnimalDetailsScreen extends ConsumerWidget {
-  final int animalId;
-  const AnimalDetailsScreen({Key? key, required this.animalId})
-      : super(key: key);
+  const AnimalDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // we use watch and select to filter the selected animal in our state
-    Animal animal = ref.watch(animalsProvider.select((List<Animal> animals) =>
-        animals.firstWhere((animal) => animal.id == animalId)));
+    Animal animal = ref.watch(animalsProvider.notifier).selectedAnimal;
 
     return Scaffold(
       appBar: AppBar(

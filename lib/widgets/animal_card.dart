@@ -102,9 +102,9 @@ class AnimalCard extends StatelessWidget {
                 top: -6.0,
                 child: ElevatedButton(
                   onPressed: () {
+                    ref.read(animalsProvider.notifier).selectAnimal(animal.id);
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) =>
-                          AnimalDetailsScreen(animalId: animal.id!)),
+                      builder: ((context) => const AnimalDetailsScreen()),
                     ));
                   },
                   style: ElevatedButton.styleFrom(

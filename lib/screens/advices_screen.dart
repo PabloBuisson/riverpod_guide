@@ -49,7 +49,8 @@ class AdvicesScreen extends ConsumerWidget {
             const Text(
               "Random advice",
               textAlign: TextAlign.center,
-              textScaleFactor: 1.4,
+              textScaleFactor: 1.6,
+              style: TextStyle(fontWeight: FontWeight.w600),
             ),
             AdviceBlock(advice: adviceRandom),
             const SizedBox(
@@ -58,7 +59,8 @@ class AdvicesScreen extends ConsumerWidget {
             Text(
               "Advice with id $randomNumber",
               textAlign: TextAlign.center,
-              textScaleFactor: 1.4,
+              textScaleFactor: 1.6,
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
             AdviceBlock(advice: adviceRandomId),
           ],

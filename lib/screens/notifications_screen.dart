@@ -15,6 +15,7 @@ class NotificationsScreenState extends ConsumerState<NotificationsScreen> {
   @override
   void dispose() {
     // "ref" can be used in all life-cycles of a StatefulWidget
+    // will reset the counterNotifications to 0 when the user leaves the page
     ref.invalidate(counterNotifications);
     super.dispose();
   }
@@ -35,6 +36,7 @@ class NotificationsScreenState extends ConsumerState<NotificationsScreen> {
               error: (Object error, _) =>
                   "A problem occurred, please try again later",
               loading: () => "Loading..."),
+          textScaleFactor: 1.6,
         ),
       ),
     );
