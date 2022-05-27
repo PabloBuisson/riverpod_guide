@@ -13,7 +13,7 @@ class FakeWebsocketClient implements WebsocketClient {
     int i = 0;
     while (true) {
       yield i++;
-      await Future.delayed(const Duration(minutes: 1));
+      await Future.delayed(const Duration(seconds: 20));
     }
   }
 }

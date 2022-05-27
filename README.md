@@ -29,7 +29,7 @@ A Flutter project which explore all the possibilities and novelties of the River
   
 ## :iphone: Images
 
-TODO
+<img width="350" alt="Flutter autocomplete demo" src="https://user-images.githubusercontent.com/41048008/170668999-cf13463a-50b6-4cee-879f-e90b27c76183.gif">
 
 ## 🏍 Run the project
 1. Clone the repo
@@ -39,10 +39,10 @@ TODO
 
 ## :package: Packages
 
-* [flutter_riverpod](#https://pub.dev/packages/flutter_riverpod)
-* [badges](#https://pub.dev/packages/badges)
-* [http](#https://pub.dev/packages/http)
-* [cached_network_image](#https://pub.dev/packages/cached_network_image)
+* [flutter_riverpod](https://pub.dev/packages/flutter_riverpod)
+* [badges](https://pub.dev/packages/badges)
+* [http](https://pub.dev/packages/http)
+* [cached_network_image](https://pub.dev/packages/cached_network_image)
 
 ## :pushpin: Technologies
 
